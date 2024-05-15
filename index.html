@@ -1,36 +1,56 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-  <meta charset="utf-8">
-  <title>Sample Deployment</title>
-  <style>
-    body {
-      color: #ffffff;
-      background-color: #007f3f;
-      font-family: Arial, sans-serif;
-      font-size: 14px;
-    }
-    
-    h1 {
-      font-size: 500%;
-      font-weight: normal;
-      margin-bottom: 0;
-    }
-    
-    h2 {
-      font-size: 200%;
-      font-weight: normal;
-      margin-bottom: 0;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aceptación de Datos Personales</title>
 </head>
 <body>
-  <div align="center">
-    <h1>Congratulations!</h1>
-    <h2>You have successfully created a pipeline that retrieved this source application from an Amazon S3 bucket and deployed it 
-	to three Amazon EC2 instances using AWS CodeDeploy.</h2>
-    <p>For next steps, read the AWS CodePipeline Documentation.</p>
-  </div>
+    <h1>Política de Tratamiento de Datos Personales</h1>
+    <p>Lea atentamente la siguiente política de tratamiento de datos personales de "Imperial Luck":</p>
+    [Insertar aquí la política de tratamiento de datos completa]
+    <p>¿Acepta usted los términos de esta política de tratamiento de datos?</p>
+    <input type="checkbox" id="aceptarDatos" name="aceptarDatos">
+    <label for="aceptarDatos">Sí, acepto</label>
+    <button id="btnAceptar">Aceptar</button>
+
+    <script>
+        const btnAceptar = document.getElementById('btnAceptar');
+        const aceptarDatosCheckbox = document.getElementById('aceptarDatos');
+
+        btnAceptar.addEventListener('click', () => {
+            if (aceptarDatosCheckbox.checked) {
+                // Enviar solicitud de aceptación de datos a la API del casino
+                const datosUsuario = {
+                    idUsuario: [ID DEL USUARIO], // Obtener ID del usuario de la sesión
+                    aceptaDatos: true
+                };
+
+                fetch('/api/datos-personales/aceptar', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(datosUsuario)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Mostrar mensaje de éxito
+                        alert('Su aceptación de datos ha sido registrada correctamente.');
+                    } else {
+                        // Mostrar mensaje de error
+                        alert('Error al registrar su aceptación de datos.');
+                    }
+                })
+                .catch(error => {
+                    console.error(error);
+                    alert('Error en la comunicación con el servidor.');
+                });
+            } else {
+                alert('Debe aceptar la política de tratamiento de datos para continuar.');
+            }
+        });
+    </script>
 </body>
 </html>
-
