@@ -14,43 +14,6 @@
     <label for="aceptarDatos">Sí, acepto</label>
     <button id="btnAceptar">Aceptar</button>
 
-    <script>
-        const btnAceptar = document.getElementById('btnAceptar');
-        const aceptarDatosCheckbox = document.getElementById('aceptarDatos');
-
-        btnAceptar.addEventListener('click', () => {
-            if (aceptarDatosCheckbox.checked) {
-                // Enviar solicitud de aceptación de datos a la API del casino
-                const datosUsuario = {
-                    idUsuario: "12345", // Obtener ID del usuario de la sesión
-                    aceptaDatos: true
-                };
-
-                fetch('/api/datos-personales/aceptar', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(datosUsuario)
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        // Mostrar mensaje de éxito
-                        alert('Su aceptación de datos ha sido registrada correctamente.');
-                    } else {
-                        // Mostrar mensaje de error
-                        alert('Error al registrar su aceptación de datos.');
-                    }
-                })
-                .catch(error => {
-                    console.error(error);
-                    alert('Error en la comunicación con el servidor.');
-                });
-            } else {
-                alert('Debe aceptar la política de tratamiento de datos para continuar.');
-            }
-        });
-    </script>
+    <script src="index.js"></script>
 </body>
 </html>
