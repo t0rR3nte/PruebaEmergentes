@@ -5,9 +5,6 @@ exports.handler = async (event) => {
     // Extract user data from the event body
     const { idUsuario, aceptaDatos } = JSON.parse(event.body);
 
-    // Initialize DynamoDB client
-    const dynamodb = new AWS.DynamoDB.DocumentClient();
-
     // Validate acceptsDatos value
     if (!aceptaDatos) {
       return {
@@ -18,14 +15,6 @@ exports.handler = async (event) => {
         }),
       };
     }
-
-    // Update user data in DynamoDB table
-    await dynamodb.update({
-      TableName: 'datos-personales', // Replace with your actual table name
-      Key: { idUsuario },
-      UpdateExpression: 'SET aceptaDatos = :aceptaDatos',
-      ExpressionAttributeValues: { ':aceptaDatos': aceptaDatos },
-    }).promise();
 
     // Return successful response
     return {
