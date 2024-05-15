@@ -1,35 +1,21 @@
-exports.handler = async (event) => {
-  try {
-    // Extract user data from the event body
-    const { idUsuario, aceptaDatos } = JSON.parse(event.body);
+const btnAceptar = document.getElementById('btnAceptar');
+const aceptarDatosCheckbox = document.getElementById('aceptarDatos');
 
-    // Validate acceptsDatos value
-    if (!aceptaDatos) {
-      return {
-        statusCode: 500,
-        body: JSON.stringify({
-          success: false,
-          message: 'Error: El valor de aceptaDatos debe ser true.',
-        }),
-      };
+btnAceptar.addEventListener('click', () => {
+    if (aceptarDatosCheckbox.checked) {
+        const aceptaDatos = aceptarDatosCheckbox.checked;
+
+        if (aceptaDatos == true) {
+                alert('Su aceptación de datos ha sido registrada correctamente.');
+            } else {
+                alert('Error al registrar su aceptación de datos.');
+            }
+        })
+        .catch(error => {
+            console.error(error);
+            alert('Error en la comunicación con el servidor.');
+        });
+    } else {
+        alert('Debe aceptar la política de tratamiento de datos para continuar.');
     }
-
-    // Return successful response
-    return {
-      statusCode: 200,
-      body: JSON.stringify({
-        success: true,
-        message: 'Aceptación de datos registrada correctamente.',
-      }),
-    };
-  } catch (error) {
-    console.error(error);
-    return {
-      statusCode: 500,
-      body: JSON.stringify({
-        success: false,
-        message: 'Error al registrar la aceptación de datos.',
-      }),
-    };
-  }
-};
+});
