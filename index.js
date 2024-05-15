@@ -1,5 +1,3 @@
-const AWS = require('aws-sdk');
-
 exports.handler = async (event) => {
   try {
     // Extract user data from the event body
