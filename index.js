@@ -1,3 +1,5 @@
+const AWS = require('aws-sdk');
+
 const btnAceptar = document.getElementById('btnAceptar');
 const aceptarDatosCheckbox = document.getElementById('aceptarDatos');
 
