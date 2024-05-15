@@ -8,6 +8,17 @@ exports.handler = async (event) => {
     // Initialize DynamoDB client
     const dynamodb = new AWS.DynamoDB.DocumentClient();
 
+    // Validate acceptsDatos value
+    if (!aceptaDatos) {
+      return {
+        statusCode: 500,
+        body: JSON.stringify({
+          success: false,
+          message: 'Error: El valor de aceptaDatos debe ser true.',
+        }),
+      };
+    }
+
     // Update user data in DynamoDB table
     await dynamodb.update({
       TableName: 'datos-personales', // Replace with your actual table name
